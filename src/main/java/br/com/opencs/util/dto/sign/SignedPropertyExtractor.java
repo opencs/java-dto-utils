@@ -70,7 +70,7 @@ class SignedPropertyExtractor {
 		this.dtoClass = dtoClass;
 		this.methodList = findSignedProperties(dtoClass);
 		if (this.methodList.size() == 0) {
-			throw new DTOSignerException(String.format(
+			throw new NoAnnotationException(String.format(
 					"The class %1$s has no properties to sign.", dtoClass.getName()));
 		}
 		Collections.sort(methodList, MethodNameComparator.INSTANCE);
@@ -78,11 +78,11 @@ class SignedPropertyExtractor {
 
 	private void checkMethodSuitablility(Method method) throws DTOSignerException {
 		if (method.getParameterCount() > 0) {
-			throw new DTOSignerException(
+			throw new InvalidPropertyException(
 					String.format("The method %1$s.%2$s() cannot have parameters.", dtoClass.getName(), method.getName()));
 		}
 		if (method.getReturnType().equals(Void.TYPE)) {
-			throw new DTOSignerException(
+			throw new InvalidPropertyException(
 					String.format("The method %1$s.%2$s() must have a return value.", dtoClass.getName(), method.getName()));
 		}
 	}
