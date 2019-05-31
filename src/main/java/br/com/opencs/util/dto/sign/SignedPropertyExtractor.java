@@ -81,7 +81,7 @@ class SignedPropertyExtractor {
 			throw new DTOSignerException(
 					String.format("The method %1$s.%2$s() cannot have parameters.", dtoClass.getName(), method.getName()));
 		}
-		if (method.getReturnType().getTypeName().equals("void")) {
+		if (method.getReturnType().equals(Void.TYPE)) {
 			throw new DTOSignerException(
 					String.format("The method %1$s.%2$s() must have a return value.", dtoClass.getName(), method.getName()));
 		}
