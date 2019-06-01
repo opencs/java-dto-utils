@@ -31,8 +31,32 @@
  */
 package br.com.opencs.util.dto.copy;
 
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+/**
+ * This annotation is used in the setters of the DTO to map
+ * which getter of the source class must be used during the
+ * copy of the values.
+ *
+ * @author Fabio Jun Takada Chino
+ */
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
 public @interface AutoCopyGetter {
+	/**
+	 * The class of the source.
+	 */
 	Class<?> source();
+	/**
+	 * The name of the getter.
+	 */
 	String name();
+	/**
+	 * Indicates that a copy constructor must be used
+	 * during the copy procedure. 
+	 */
 	boolean useCopyConstructor() default false;
 }

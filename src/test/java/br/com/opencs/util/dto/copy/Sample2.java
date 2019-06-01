@@ -31,13 +31,51 @@
  */
 package br.com.opencs.util.dto.copy;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+public class Sample2 {
 
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.METHOD)
-public @interface AutoCopyFrom {
-	AutoCopyGetter [] value();
+	private int i;
+	
+	private float f;
+	
+	private String s;
+	
+	private CloneableSample cloneable;
+
+	@AutoCopyTo({
+		@AutoCopySetter(target = Sample2.class, name = "setI", useCopyConstructor = false)
+	})	
+	public int getI() {
+		return i;
+	}
+
+	@AutoCopyFrom({
+		@AutoCopyGetter(source = Sample2.class, name = "getI", useCopyConstructor = false)
+	})
+	public void setI(int i) {
+		this.i = i;
+	}
+
+	public float getF() {
+		return f;
+	}
+
+	public void setF(float f) {
+		this.f = f;
+	}
+
+	public String getS() {
+		return s;
+	}
+
+	public void setS(String s) {
+		this.s = s;
+	}
+
+	public CloneableSample getCloneable() {
+		return cloneable;
+	}
+
+	public void setCloneable(CloneableSample cloneable) {
+		this.cloneable = cloneable;
+	}
 }

@@ -79,6 +79,16 @@ class AutoCopyUtils {
 					method.getName()));
 		}
 	}
+	
+	public static Constructor<?> getCopyConstructor(Class<?> type) throws UnableToCopyException {
+		try {
+			return type.getConstructor(type);
+		} catch (Exception e) {
+			throw new UnableToCopyException(
+					String.format("The class %1$s has no copy constructor.", 
+							type.getName()), e);
+		}
+	}
 
 	public static Object createCopy(Class<?> targetType, Object source) throws UnableToCopyException {
 
